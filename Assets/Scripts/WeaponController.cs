@@ -104,6 +104,14 @@ public class WeaponController : MonoBehaviour
         if (Physics.Raycast(ray, out RaycastHit hit, range))
         {
             Debug.Log("Hit: " + hit.collider.name);
+
+            EnemyHealth enemy =
+                hit.collider.GetComponentInParent<EnemyHealth>();
+
+            if (enemy != null)
+            {
+                enemy.TakeDamage(10);
+            }
         }
 
         Debug.Log("Ammo: " + gunAmmo);
@@ -155,6 +163,18 @@ public class WeaponController : MonoBehaviour
         isReloading = false;
 
         Debug.Log("Reload complete. Ammo: " + gunAmmo);
+    }
+
+    public void AddAmmo(int amount)
+    {
+        gunAmmo += amount;
+
+        if (gunAmmo > maxAmmo)
+        {
+            gunAmmo = maxAmmo;
+        }
+
+        UpdateAmmoText();
     }
 
     void UpdateAmmoText()

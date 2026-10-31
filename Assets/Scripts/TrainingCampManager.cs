@@ -1,17 +1,29 @@
 using UnityEngine;
 using TMPro;
 using UnityStandardAssets.Characters.FirstPerson;
+using UnityEngine.SceneManagement;
 
 public class TrainingCampManager : MonoBehaviour
 {
+    public static TrainingCampManager instance;
+
     public TMP_Text pauseButtonText;
+    public TMP_Text scoreText;
 
     public FirstPersonController playerController;
 
     private bool isPaused = true;
+    private int score = 0;
+
+    void Awake()
+    {
+        instance = this;
+    }
 
     void Start()
     {
+        UpdateScoreText();
+
         playerController.enabled = false;
         Time.timeScale = 0f;
         pauseButtonText.text = "START";
@@ -25,6 +37,29 @@ public class TrainingCampManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.P))
         {
             TogglePause();
+        }
+    }
+
+    public void AddScore()
+    {
+        score++;
+        UpdateScoreText();
+
+        if (score >= 3)
+        {
+            Time.timeScale = 1f;
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+
+            SceneManager.LoadScene("winScene");
+        }
+    }
+
+    void UpdateScoreText()
+    {
+        if (scoreText != null)
+        {
+            scoreText.text = "Collectibles: " + score + " / 3";
         }
     }
 

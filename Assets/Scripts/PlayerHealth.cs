@@ -1,5 +1,6 @@
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -20,6 +21,19 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
+    public void Heal(int amount)
+    {
+        health += amount;
+
+        if (health > 100)
+        {
+            health = 100;
+        }
+
+        UpdateHealthText();
+    }
+
+
     public void TakeDamage(int damage)
     {
         health -= damage;
@@ -30,6 +44,15 @@ public class PlayerHealth : MonoBehaviour
         }
 
         UpdateHealthText();
+
+        if (health == 0)
+        {
+            Time.timeScale = 1f;
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+
+            SceneManager.LoadScene("loseScene");
+        }
     }
 
     void UpdateHealthText()

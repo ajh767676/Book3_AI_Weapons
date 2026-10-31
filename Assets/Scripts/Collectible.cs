@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityStandardAssets.Characters.FirstPerson;
 
 public class Collectible : MonoBehaviour
 {
@@ -11,9 +12,20 @@ public class Collectible : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        FirstPersonController player =
+            other.GetComponentInParent<FirstPersonController>();
+
+        if (player != null)
         {
-            SimpleAIGameManager.instance.AddScore();
+            if (TrainingCampManager.instance != null)
+            {
+                TrainingCampManager.instance.AddScore();
+            }
+            else if (SimpleAIGameManager.instance != null)
+            {
+                SimpleAIGameManager.instance.AddScore();
+            }
+
             Debug.Log("Collectible picked up!");
             Destroy(gameObject);
         }

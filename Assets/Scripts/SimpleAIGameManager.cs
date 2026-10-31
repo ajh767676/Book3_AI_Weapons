@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class SimpleAIGameManager : MonoBehaviour
 {
@@ -142,13 +143,28 @@ public class SimpleAIGameManager : MonoBehaviour
 
         if (score >= collectiblesNeeded)
         {
-            currentLevel++;
-            score = 0;
+            string sceneName =
+                SceneManager.GetActiveScene().name;
 
-            UpdateScoreText();
-            UpdateLevelText();
+            if (sceneName == "gameLevel" ||
+                sceneName == "gameLevelAuto")
+            {
+                Time.timeScale = 1f;
+                SceneManager.LoadScene("winScene");
+            }
+            else
+            {
+                currentLevel++;
+                score = 0;
 
-            Debug.Log("Level completed! Starting level " + currentLevel);
+                UpdateScoreText();
+                UpdateLevelText();
+
+                Debug.Log(
+                    "Level completed! Starting level " +
+                    currentLevel
+                );
+            }
         }
     }
 
