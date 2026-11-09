@@ -2586,6 +2586,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: f5ecd1066521c4e41b6c083e4b40df62, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2029786111}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: f5ecd1066521c4e41b6c083e4b40df62, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2029786112}
   m_SourcePrefab: {fileID: 100100000, guid: f5ecd1066521c4e41b6c083e4b40df62, type: 3}
 --- !u!1 &711712093
 GameObject:
@@ -7067,7 +7070,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2029786107}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5bfa8bca9d9e2484c8b3c0879a52c689, type: 3}
   m_Name: 
@@ -7077,6 +7080,21 @@ MonoBehaviour:
   - {fileID: 1578758071}
   - {fileID: 182127248}
   - {fileID: 1314409648}
+  randomPatrol: 1
+--- !u!114 &2029786112
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2029786107}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8788b4facb955304e969f78e1158c8e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SoldierWander
+  wanderRadius: 15
+  changeInterval: 4
 --- !u!1 &2086078185
 GameObject:
   m_ObjectHideFlags: 0

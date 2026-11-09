@@ -5,6 +5,7 @@ using UnityEngine.AI;
 public class SoldierPatrol : MonoBehaviour
 {
     public Transform[] waypoints;
+    public bool randomPatrol;
 
     private NavMeshAgent agent;
     private int currentPoint;
@@ -27,8 +28,26 @@ public class SoldierPatrol : MonoBehaviour
             agent.pathStatus == NavMeshPathStatus.PathComplete &&
             agent.remainingDistance <= agent.stoppingDistance + 0.1f)
         {
-            currentPoint = (currentPoint + 1) % waypoints.Length;
+            ChooseNextPoint();
             GoToCurrentPoint();
+        }
+    }
+
+    void ChooseNextPoint()
+    {
+        if (randomPatrol && waypoints.Length > 1)
+        {
+            // Choose another point without repeating the current one.
+            int nextPoint = Random.Range(0, waypoints.Length - 1);
+
+            if (nextPoint >= currentPoint)
+                nextPoint++;
+
+            currentPoint = nextPoint;
+        }
+        else
+        {
+            currentPoint = (currentPoint + 1) % waypoints.Length;
         }
     }
 
