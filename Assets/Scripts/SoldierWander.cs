@@ -10,6 +10,9 @@ public class SoldierWander : MonoBehaviour
     private NavMeshAgent agent;
     private float timer;
 
+    public float lookAheadDistance = 2f;
+    private float nextObstacleCheck;
+
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
@@ -22,6 +25,30 @@ public class SoldierWander : MonoBehaviour
             return;
 
         timer += Time.deltaTime;
+
+        // Check ahead twice per second.
+        if (Time.time >= nextObstacleCheck)
+        {
+            nextObstacleCheck = Time.time + 0.5f;
+
+            Vector3 origin = transform.position + Vector3.up * 0.8f;
+            Vector3 direction = transform.forward;
+
+            Debug.DrawRay(origin, direction * lookAheadDistance,
+                          Color.red, 0.5f);
+
+            if (Physics.Raycast(origin, direction, out RaycastHit obstacle,
+                                lookAheadDistance, Physics.DefaultRaycastLayers,
+                                QueryTriggerInteraction.Ignore))
+            {
+                // Ignore colliders belonging to this soldier.
+                if (!obstacle.transform.IsChildOf(transform))
+                {
+                    ChooseDestination();
+                    return;
+                }
+            }
+        }
 
         bool arrived = !agent.pathPending &&
                        agent.hasPath &&
