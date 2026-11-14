@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="4" result="Passed" total="4" passed="4" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-11-14 15:41:18Z" end-time="2026-11-14 15:41:18Z" duration="0.8013148">
+  <test-suite type="TestSuite" id="1010" name="Book3_AI_Weapons" fullname="Book3_AI_Weapons" runstate="Runnable" testcasecount="4" result="Passed" start-time="2026-11-14 15:41:18Z" end-time="2026-11-14 15:41:18Z" duration="0.801315" total="4" passed="4" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="PlayMode" />
+    </properties>
+    <test-suite type="Assembly" id="1007" name="Tests.dll" fullname="D:/Book3_AI_Weapons/Library/ScriptAssemblies/Tests.dll" runstate="Runnable" testcasecount="4" result="Passed" start-time="2026-11-14 15:41:18Z" end-time="2026-11-14 15:41:18Z" duration="0.783806" total="4" passed="4" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="20956" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="PlayMode" />
+        <property name="EditorOnly" value="False" />
+      </properties>
+      <test-suite type="TestFixture" id="1001" name="OffmeshTests" fullname="OffmeshTests" classname="OffmeshTests" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-11-14 15:41:18Z" end-time="2026-11-14 15:41:18Z" duration="0.553883" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-case id="1002" name="JumpAllowedCreatesCompletePathAcrossGap" fullname="OffmeshTests.JumpAllowedCreatesCompletePathAcrossGap" methodname="JumpAllowedCreatesCompletePathAcrossGap" classname="OffmeshTests" runstate="Runnable" seed="348023542" result="Passed" start-time="2026-11-14 15:41:18Z" end-time="2026-11-14 15:41:18Z" duration="0.394495" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <output><![CDATA[Reload Time: 2 seconds
+]]></output>
+        </test-case>
+        <test-case id="1003" name="JumpExcludedPreventsCompletePathAcrossGap" fullname="OffmeshTests.JumpExcludedPreventsCompletePathAcrossGap" methodname="JumpExcludedPreventsCompletePathAcrossGap" classname="OffmeshTests" runstate="Runnable" seed="1601981415" result="Passed" start-time="2026-11-14 15:41:18Z" end-time="2026-11-14 15:41:18Z" duration="0.134530" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <output><![CDATA[Reload Time: 2 seconds
+]]></output>
+        </test-case>
+      </test-suite>
+      <test-suite type="TestFixture" id="1004" name="PathsTests" fullname="PathsTests" classname="PathsTests" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-11-14 15:41:18Z" end-time="2026-11-14 15:41:18Z" duration="0.224266" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-case id="1005" name="FixedPatrolVisitsWaypointsInOrderAndLoops" fullname="PathsTests.FixedPatrolVisitsWaypointsInOrderAndLoops" methodname="FixedPatrolVisitsWaypointsInOrderAndLoops" classname="PathsTests" runstate="Runnable" seed="380776697" result="Passed" start-time="2026-11-14 15:41:18Z" end-time="2026-11-14 15:41:18Z" duration="0.112042" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <output><![CDATA[Reload Time: 2 seconds
+]]></output>
+        </test-case>
+        <test-case id="1006" name="RandomPatrolChoosesValidPointWithoutImmediateRepeat" fullname="PathsTests.RandomPatrolChoosesValidPointWithoutImmediateRepeat" methodname="RandomPatrolChoosesValidPointWithoutImmediateRepeat" classname="PathsTests" runstate="Runnable" seed="599398693" result="Passed" start-time="2026-11-14 15:41:18Z" end-time="2026-11-14 15:41:18Z" duration="0.088801" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <output><![CDATA[Reload Time: 2 seconds
+]]></output>
+        </test-case>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

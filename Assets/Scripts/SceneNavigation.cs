@@ -44,5 +44,13 @@ public class SceneNavigation : MonoBehaviour
         {
             SceneManager.LoadScene("gameLevelAuto");
         }
+        else if (option == 4)
+        {
+            SceneManager.LoadScene("offmesh");
+        }
+        else if (option == 5)
+        {
+            SceneManager.LoadScene("paths");
+        }
     }
 }

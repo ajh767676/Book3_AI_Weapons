@@ -26,5 +26,11 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/gameLevel.unity
     guid: e364bae0e41554348ade4a33bbb56de2
+  - enabled: 1
+    path: Assets/Scenes/offmesh.unity
+    guid: 5147323ee9f81bd42b2fa17b28042b28
+  - enabled: 1
+    path: Assets/Scenes/paths.unity
+    guid: a5dd8695399e846419400d5535fb9581
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 289c1b55c9541489481df5cc06664110, type: 3}
