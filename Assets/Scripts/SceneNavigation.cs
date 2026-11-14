@@ -46,11 +46,11 @@ public class SceneNavigation : MonoBehaviour
         }
         else if (option == 4)
         {
-            SceneManager.LoadScene("navigationPractice");
+            SceneManager.LoadScene("offmesh");
         }
         else if (option == 5)
         {
-            SceneManager.LoadScene("pathPractice");
+            SceneManager.LoadScene("paths");
         }
     }
 }

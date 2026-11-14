@@ -1425,6 +1425,50 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8094325944016350331, guid: 0f13e74f535cf924b9f1e67e66539475, type: 3}
+      propertyPath: m_Options.m_Options.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8094325944016350331, guid: 0f13e74f535cf924b9f1e67e66539475, type: 3}
+      propertyPath: m_Options.m_Options.Array.data[4].m_Text
+      value: offmesh
+      objectReference: {fileID: 0}
+    - target: {fileID: 8094325944016350331, guid: 0f13e74f535cf924b9f1e67e66539475, type: 3}
+      propertyPath: m_Options.m_Options.Array.data[5].m_Text
+      value: paths
+      objectReference: {fileID: 0}
+    - target: {fileID: 8094325944016350331, guid: 0f13e74f535cf924b9f1e67e66539475, type: 3}
+      propertyPath: m_Options.m_Options.Array.data[4].m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8094325944016350331, guid: 0f13e74f535cf924b9f1e67e66539475, type: 3}
+      propertyPath: m_Options.m_Options.Array.data[4].m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8094325944016350331, guid: 0f13e74f535cf924b9f1e67e66539475, type: 3}
+      propertyPath: m_Options.m_Options.Array.data[4].m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8094325944016350331, guid: 0f13e74f535cf924b9f1e67e66539475, type: 3}
+      propertyPath: m_Options.m_Options.Array.data[4].m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8094325944016350331, guid: 0f13e74f535cf924b9f1e67e66539475, type: 3}
+      propertyPath: m_Options.m_Options.Array.data[5].m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8094325944016350331, guid: 0f13e74f535cf924b9f1e67e66539475, type: 3}
+      propertyPath: m_Options.m_Options.Array.data[5].m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8094325944016350331, guid: 0f13e74f535cf924b9f1e67e66539475, type: 3}
+      propertyPath: m_Options.m_Options.Array.data[5].m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8094325944016350331, guid: 0f13e74f535cf924b9f1e67e66539475, type: 3}
+      propertyPath: m_Options.m_Options.Array.data[5].m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
