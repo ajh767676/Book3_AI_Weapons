@@ -17,6 +17,10 @@ public class SoldierSmart : MonoBehaviour
     public Transform[] waypoints;
 
     public Transform healthPickup;
+
+    public Transform ammoPickup;
+    public int ammo = 100;
+
     public float health = 100f;
     public float healthDrainRate = 1f;
 
@@ -51,6 +55,7 @@ public class SoldierSmart : MonoBehaviour
             0f, health - healthDrainRate * Time.deltaTime);
 
         animator.SetFloat("health", health);
+        animator.SetFloat("ammo", ammo);
 
         if (health < 1f)
         {
@@ -109,7 +114,8 @@ public class SoldierSmart : MonoBehaviour
         bool canShootPlayer =
             canSeePlayer &&
             distance <= shootingDistance &&
-            health > 20f;
+            health > 20f &&
+            ammo > 20;
 
         animator.SetBool("canShootPlayer", canShootPlayer);
 
@@ -144,6 +150,28 @@ public class SoldierSmart : MonoBehaviour
                 agent.isStopped = true;
             }
         }
+        else if (state.IsName("lookForAmmo"))
+        {
+            if (ammoPickup != null &&
+                ammoPickup.gameObject.activeInHierarchy)
+            {
+                agent.isStopped = false;
+                agent.SetDestination(ammoPickup.position);
+
+                if (Vector3.Distance(
+                    transform.position,
+                    ammoPickup.position) <= 2f)
+                {
+                    ammo = 100;
+                    animator.SetFloat("ammo", ammo);
+                    agent.ResetPath();
+                }
+            }
+            else
+            {
+                agent.isStopped = true;
+            }
+        }
         else if (state.IsName("shootPlayer"))
         {
             agent.isStopped = true;
@@ -157,6 +185,8 @@ public class SoldierSmart : MonoBehaviour
                 if (playerHealth != null)
                 {
                     playerHealth.TakeDamage(shootingDamage);
+                    ammo = Mathf.Max(0, ammo - 1);
+                    animator.SetFloat("ammo", ammo);
                 }
 
                 nextShotTime =
