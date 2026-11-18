@@ -9,6 +9,10 @@ public class SoldierSmart : MonoBehaviour
     public float hearingDistance = 3f;
     public float sightDistance = 10f;
     public float fieldOfView = 90f;
+    public float shootingDistance = 5f;
+
+    public int shootingDamage = 10;
+    public float shootingInterval = 1f;
 
     public Transform[] waypoints;
 
@@ -16,6 +20,7 @@ public class SoldierSmart : MonoBehaviour
     public float health = 100f;
     public float healthDrainRate = 1f;
 
+    private float nextShotTime;
     private int currentPoint;
     private Vector3 startingPosition;
     private bool wasPatrolling;
@@ -30,23 +35,22 @@ public class SoldierSmart : MonoBehaviour
         animator = GetComponent<Animator>();
         startingPosition = transform.position;
     }
-    
 
     void Update()
     {
-        if (Time.timeScale == 0f || !agent.isOnNavMesh)
+        if (Time.timeScale == 0f || isDead ||
+            !agent.isOnNavMesh)
+        {
             return;
+        }
 
         if (player == null)
             return;
 
-        health = Mathf.Max(0f,
-            health - healthDrainRate * Time.deltaTime);
+        health = Mathf.Max(
+            0f, health - healthDrainRate * Time.deltaTime);
 
         animator.SetFloat("health", health);
-
-        if (isDead)
-            return;
 
         if (health < 1f)
         {
@@ -54,11 +58,14 @@ public class SoldierSmart : MonoBehaviour
             agent.isStopped = true;
             agent.ResetPath();
 
+            animator.SetBool("canHearPlayer", false);
+            animator.SetBool("canSeePlayer", false);
+            animator.SetBool("canShootPlayer", false);
+
             animator.Play("die", 0, 0f);
             Destroy(gameObject, 4f);
             return;
         }
-
 
         float distance = Vector3.Distance(
             transform.position, player.position);
@@ -85,7 +92,9 @@ public class SoldierSmart : MonoBehaviour
                 player.position + Vector3.up;
 
             if (Physics.Linecast(
-                eyePosition, playerPosition, out RaycastHit hit,
+                eyePosition,
+                playerPosition,
+                out RaycastHit hit,
                 Physics.DefaultRaycastLayers,
                 QueryTriggerInteraction.Ignore))
             {
@@ -97,16 +106,22 @@ public class SoldierSmart : MonoBehaviour
 
         animator.SetBool("canSeePlayer", canSeePlayer);
 
+        bool canShootPlayer =
+            canSeePlayer &&
+            distance <= shootingDistance &&
+            health > 20f;
+
+        animator.SetBool("canShootPlayer", canShootPlayer);
+
         AnimatorStateInfo state =
-    animator.GetCurrentAnimatorStateInfo(0);
+            animator.GetCurrentAnimatorStateInfo(0);
 
         bool isPatrolling = state.IsName("patrol");
+
         animator.SetBool("hasReachedStart", false);
 
         if (state.IsName("lookForHealth"))
         {
-            wasPatrolling = false;
-
             if (healthPickup != null &&
                 healthPickup.gameObject.activeInHierarchy)
             {
@@ -114,10 +129,12 @@ public class SoldierSmart : MonoBehaviour
                 agent.SetDestination(healthPickup.position);
 
                 if (Vector3.Distance(
-                    transform.position, healthPickup.position) <= 2f)
+                    transform.position,
+                    healthPickup.position) <= 2f)
                 {
                     health = 100f;
                     animator.SetFloat("health", health);
+
                     healthPickup.gameObject.SetActive(false);
                     agent.ResetPath();
                 }
@@ -125,6 +142,41 @@ public class SoldierSmart : MonoBehaviour
             else
             {
                 agent.isStopped = true;
+            }
+        }
+        else if (state.IsName("shootPlayer"))
+        {
+            agent.isStopped = true;
+
+            if (canShootPlayer &&
+                Time.time >= nextShotTime)
+            {
+                PlayerHealth playerHealth =
+                    player.GetComponentInParent<PlayerHealth>();
+
+                if (playerHealth != null)
+                {
+                    playerHealth.TakeDamage(shootingDamage);
+                }
+
+                nextShotTime =
+                    Time.time + shootingInterval;
+            }
+
+            Vector3 lookDirection =
+                player.position - transform.position;
+
+            lookDirection.y = 0f;
+
+            if (lookDirection.sqrMagnitude > 0.001f)
+            {
+                Quaternion targetRotation =
+                    Quaternion.LookRotation(lookDirection);
+
+                transform.rotation = Quaternion.RotateTowards(
+                    transform.rotation,
+                    targetRotation,
+                    agent.angularSpeed * Time.deltaTime);
             }
         }
         else if (state.IsName("followPlayer"))
@@ -138,10 +190,13 @@ public class SoldierSmart : MonoBehaviour
             {
                 currentPoint = 0;
                 agent.ResetPath();
-                animator.ResetTrigger("startToGoBackToStart");
+
+                animator.ResetTrigger(
+                    "startToGoBackToStart");
             }
 
-            if (waypoints.Length > 0 &&
+            if (waypoints != null &&
+                waypoints.Length > 0 &&
                 currentPoint < waypoints.Length &&
                 waypoints[currentPoint] != null)
             {
@@ -153,9 +208,10 @@ public class SoldierSmart : MonoBehaviour
                         waypoints[currentPoint].position);
                 }
                 else if (!agent.pathPending &&
-                         agent.pathStatus == NavMeshPathStatus.PathComplete &&
+                         agent.pathStatus ==
+                             NavMeshPathStatus.PathComplete &&
                          agent.remainingDistance <=
-                         agent.stoppingDistance + 0.1f)
+                             agent.stoppingDistance + 0.1f)
                 {
                     currentPoint++;
                     agent.ResetPath();
@@ -163,14 +219,18 @@ public class SoldierSmart : MonoBehaviour
                     if (currentPoint >= waypoints.Length)
                     {
                         agent.isStopped = true;
-                        animator.SetTrigger("startToGoBackToStart");
+
+                        animator.SetTrigger(
+                            "startToGoBackToStart");
                     }
                 }
             }
             else
             {
                 agent.isStopped = true;
-                animator.SetTrigger("startToGoBackToStart");
+
+                animator.SetTrigger(
+                    "startToGoBackToStart");
             }
         }
         else if (state.IsName("backToStart"))
@@ -179,7 +239,8 @@ public class SoldierSmart : MonoBehaviour
             agent.SetDestination(startingPosition);
 
             if (Vector3.Distance(
-                transform.position, startingPosition) <=
+                transform.position,
+                startingPosition) <=
                 agent.stoppingDistance + 0.1f)
             {
                 agent.isStopped = true;
