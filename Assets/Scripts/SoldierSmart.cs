@@ -63,10 +63,26 @@ public class SoldierSmart : MonoBehaviour
         animator.SetFloat("health", health);
         animator.SetFloat("ammo", ammo);
 
-        // Check pickup availability every frame.
-        bool healthPackAvailable =
-            healthPickup != null &&
-            healthPickup.gameObject.activeInHierarchy;
+        // Find the nearest active health pickup.
+        healthPickup = null;
+        float nearestDistance = Mathf.Infinity;
+
+        GameObject[] healthPacks =
+            GameObject.FindGameObjectsWithTag("NPCHealthPickup");
+
+        foreach (GameObject pack in healthPacks)
+        {
+            float packDistance =
+                (pack.transform.position - transform.position).sqrMagnitude;
+
+            if (packDistance < nearestDistance)
+            {
+                nearestDistance = packDistance;
+                healthPickup = pack.transform;
+            }
+        }
+
+        bool healthPackAvailable = healthPickup != null;
 
         animator.SetBool(
             "healthPackAvailable", healthPackAvailable);
@@ -95,12 +111,16 @@ public class SoldierSmart : MonoBehaviour
         Vector3 directionToPlayer =
             player.position - transform.position;
 
-        float angleToPlayer = Vector3.Angle(
-            transform.forward, directionToPlayer);
+        float facingPlayer = Vector3.Dot(
+    transform.forward.normalized,
+    directionToPlayer.normalized);
+
+        float sightThreshold = Mathf.Cos(
+            fieldOfView * 0.5f * Mathf.Deg2Rad);
 
         bool canSeePlayer =
             distance <= sightDistance &&
-            angleToPlayer <= fieldOfView / 2f;
+            facingPlayer >= sightThreshold;
 
         if (canSeePlayer)
         {
