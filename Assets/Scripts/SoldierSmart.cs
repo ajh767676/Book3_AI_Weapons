@@ -17,10 +17,9 @@ public class SoldierSmart : MonoBehaviour
     public Transform[] waypoints;
 
     public Transform healthPickup;
-
     public Transform ammoPickup;
-    public int ammo = 100;
 
+    public int ammo = 100;
     public float health = 100f;
     public float healthDrainRate = 1f;
 
@@ -56,6 +55,14 @@ public class SoldierSmart : MonoBehaviour
 
         animator.SetFloat("health", health);
         animator.SetFloat("ammo", ammo);
+
+        // Check pickup availability every frame.
+        bool healthPackAvailable =
+            healthPickup != null &&
+            healthPickup.gameObject.activeInHierarchy;
+
+        animator.SetBool(
+            "healthPackAvailable", healthPackAvailable);
 
         if (health < 1f)
         {
@@ -126,10 +133,33 @@ public class SoldierSmart : MonoBehaviour
 
         animator.SetBool("hasReachedStart", false);
 
-        if (state.IsName("lookForHealth"))
+        if (state.IsName("flee"))
         {
-            if (healthPickup != null &&
-                healthPickup.gameObject.activeInHierarchy)
+            Vector3 awayFromPlayer =
+                transform.position - player.position;
+
+            awayFromPlayer.y = 0f;
+
+            if (awayFromPlayer.sqrMagnitude < 0.001f)
+                awayFromPlayer = -transform.forward;
+
+            Vector3 fleeTarget =
+                transform.position +
+                awayFromPlayer.normalized * 25f;
+
+            if (NavMesh.SamplePosition(
+                fleeTarget,
+                out NavMeshHit fleeHit,
+                10f,
+                agent.areaMask))
+            {
+                agent.isStopped = false;
+                agent.SetDestination(fleeHit.position);
+            }
+        }
+        else if (state.IsName("lookForHealth"))
+        {
+            if (healthPackAvailable)
             {
                 agent.isStopped = false;
                 agent.SetDestination(healthPickup.position);
@@ -142,6 +172,9 @@ public class SoldierSmart : MonoBehaviour
                     animator.SetFloat("health", health);
 
                     healthPickup.gameObject.SetActive(false);
+                    animator.SetBool(
+                        "healthPackAvailable", false);
+
                     agent.ResetPath();
                 }
             }
@@ -185,6 +218,7 @@ public class SoldierSmart : MonoBehaviour
                 if (playerHealth != null)
                 {
                     playerHealth.TakeDamage(shootingDamage);
+
                     ammo = Mathf.Max(0, ammo - 1);
                     animator.SetFloat("ammo", ammo);
                 }
