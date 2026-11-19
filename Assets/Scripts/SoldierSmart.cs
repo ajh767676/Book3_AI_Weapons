@@ -18,6 +18,10 @@ public class SoldierSmart : MonoBehaviour
 
     public Transform healthPickup;
     public Transform ammoPickup;
+    public GameObject grenadePrefab;
+    public float grenadeFlightTime = 2f;
+    public Transform ambushSpot;
+    public BoxCollider ambushArea;
 
     public int ammo = 100;
     public float health = 100f;
@@ -28,6 +32,9 @@ public class SoldierSmart : MonoBehaviour
     private Vector3 startingPosition;
     private bool wasPatrolling;
     private bool isDead;
+    private bool wasInsideAmbushArea;
+    private bool ambushInProgress;
+    private bool wasInAmbushState;
 
     private NavMeshAgent agent;
     private Animator animator;
@@ -128,12 +135,111 @@ public class SoldierSmart : MonoBehaviour
 
         AnimatorStateInfo state =
             animator.GetCurrentAnimatorStateInfo(0);
+        bool inAmbushState =
+    state.IsName("goToAmbushSpot") ||
+    state.IsName("throwGrenade");
+
+        if (wasInAmbushState && !inAmbushState)
+        {
+            ambushInProgress = false;
+        }
+
+        bool insideAmbushArea =
+            ambushArea != null &&
+            ambushArea.enabled &&
+            ambushArea.gameObject.activeInHierarchy &&
+            ambushArea.bounds.Contains(player.position);
+
+        if (insideAmbushArea &&
+            !wasInsideAmbushArea &&
+            !ambushInProgress &&
+            ambushSpot != null &&
+            health > 20f &&
+            ammo > 20)
+        {
+            ambushInProgress = true;
+
+            animator.SetBool("hasReachedAmbushSpot", false);
+            animator.SetBool("hasThrownGrenade", false);
+            animator.SetTrigger("startAmbush");
+        }
+
+        animator.SetBool("isAmbushing", ambushInProgress);
+
+        wasInsideAmbushArea = insideAmbushArea;
+        wasInAmbushState = inAmbushState;
 
         bool isPatrolling = state.IsName("patrol");
 
         animator.SetBool("hasReachedStart", false);
 
-        if (state.IsName("flee"))
+        if (state.IsName("goToAmbushSpot"))
+        {
+            if (ambushSpot != null)
+            {
+                agent.isStopped = false;
+                agent.SetDestination(ambushSpot.position);
+
+                Vector3 offset =
+                    ambushSpot.position - transform.position;
+                offset.y = 0f;
+
+                if (!agent.pathPending &&
+                    offset.magnitude <=
+                    agent.stoppingDistance + 0.2f)
+                {
+                    agent.isStopped = true;
+                    animator.SetBool("hasReachedAmbushSpot", true);
+                }
+            }
+            else
+            {
+                agent.isStopped = true;
+            }
+        }
+        else if (state.IsName("throwGrenade"))
+        {
+            agent.isStopped = true;
+
+            if (!animator.GetBool("hasThrownGrenade") &&
+                grenadePrefab != null)
+            {
+                Vector3 direction = player.position - transform.position;
+                direction.y = 0f;
+
+                if (direction.sqrMagnitude < 0.001f)
+                    direction = transform.forward;
+
+                Vector3 launchPosition =
+                    transform.position +
+                    Vector3.up * 1.5f +
+                    direction.normalized * 0.8f;
+
+                GameObject grenade = Instantiate(
+                    grenadePrefab,
+                    launchPosition,
+                    Quaternion.identity);
+
+                Rigidbody grenadeBody = grenade.GetComponent<Rigidbody>();
+
+                if (grenadeBody != null)
+                {
+                    float flightTime = Mathf.Max(0.5f, grenadeFlightTime);
+
+                    Vector3 velocity =
+                        (player.position - launchPosition) / flightTime -
+                        Physics.gravity * flightTime * 0.5f;
+
+                    grenadeBody.AddForce(
+                        velocity,
+                        ForceMode.VelocityChange);
+                }
+
+                Destroy(grenade, 10f);
+                animator.SetBool("hasThrownGrenade", true);
+            }
+        }
+        else if (state.IsName("flee"))
         {
             Vector3 awayFromPlayer =
                 transform.position - player.position;
