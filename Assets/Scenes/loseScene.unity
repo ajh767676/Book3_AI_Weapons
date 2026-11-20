@@ -5065,7 +5065,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8094325944016350331, guid: 0f13e74f535cf924b9f1e67e66539475, type: 3}
       propertyPath: m_Options.m_Options.Array.size
-      value: 6
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 8094325944016350331, guid: 0f13e74f535cf924b9f1e67e66539475, type: 3}
       propertyPath: m_Options.m_Options.Array.data[4].m_Text
@@ -5077,7 +5077,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8094325944016350331, guid: 0f13e74f535cf924b9f1e67e66539475, type: 3}
       propertyPath: m_Options.m_Options.Array.data[6].m_Text
-      value: paths
+      value: senses
+      objectReference: {fileID: 0}
+    - target: {fileID: 8094325944016350331, guid: 0f13e74f535cf924b9f1e67e66539475, type: 3}
+      propertyPath: m_Options.m_Options.Array.data[7].m_Text
+      value: smarter_npcs
       objectReference: {fileID: 0}
     - target: {fileID: 8094325944016350331, guid: 0f13e74f535cf924b9f1e67e66539475, type: 3}
       propertyPath: m_Options.m_Options.Array.data[3].m_Color.b
@@ -5137,6 +5141,22 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8094325944016350331, guid: 0f13e74f535cf924b9f1e67e66539475, type: 3}
       propertyPath: m_Options.m_Options.Array.data[6].m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8094325944016350331, guid: 0f13e74f535cf924b9f1e67e66539475, type: 3}
+      propertyPath: m_Options.m_Options.Array.data[7].m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8094325944016350331, guid: 0f13e74f535cf924b9f1e67e66539475, type: 3}
+      propertyPath: m_Options.m_Options.Array.data[7].m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8094325944016350331, guid: 0f13e74f535cf924b9f1e67e66539475, type: 3}
+      propertyPath: m_Options.m_Options.Array.data[7].m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8094325944016350331, guid: 0f13e74f535cf924b9f1e67e66539475, type: 3}
+      propertyPath: m_Options.m_Options.Array.data[7].m_Color.r
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []

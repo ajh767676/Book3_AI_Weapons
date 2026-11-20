@@ -7,7 +7,7 @@ public class ProjectileCollision : MonoBehaviour
     public float explosionRadius = 3f;
     public int explosionDamage = 30;
 
-    private bool hasExploded = false;
+    private bool hasExploded;
 
     void OnCollisionEnter(Collision collision)
     {
@@ -21,19 +21,20 @@ public class ProjectileCollision : MonoBehaviour
             GameObject explosion = Instantiate(
                 explosionEffect,
                 transform.position,
-                Quaternion.identity
-            );
+                Quaternion.identity);
 
             Destroy(explosion, 3f);
         }
 
         Collider[] nearbyColliders = Physics.OverlapSphere(
             transform.position,
-            explosionRadius
-        );
+            explosionRadius);
 
         HashSet<EnemyHealth> damagedEnemies =
             new HashSet<EnemyHealth>();
+
+        HashSet<PlayerHealth> damagedPlayers =
+            new HashSet<PlayerHealth>();
 
         foreach (Collider nearbyCollider in nearbyColliders)
         {
@@ -43,6 +44,14 @@ public class ProjectileCollision : MonoBehaviour
             if (enemy != null && damagedEnemies.Add(enemy))
             {
                 enemy.TakeDamage(explosionDamage);
+            }
+
+            PlayerHealth player =
+                nearbyCollider.GetComponentInParent<PlayerHealth>();
+
+            if (player != null && damagedPlayers.Add(player))
+            {
+                player.TakeDamage(explosionDamage);
             }
         }
 

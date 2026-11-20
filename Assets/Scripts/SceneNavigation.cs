@@ -52,5 +52,13 @@ public class SceneNavigation : MonoBehaviour
         {
             SceneManager.LoadScene("paths");
         }
+        else if (option == 6)
+        {
+            SceneManager.LoadScene("senses");
+        }
+        else if (option == 7)
+        {
+            SceneManager.LoadScene("smarter_npcs");
+        }
     }
 }
