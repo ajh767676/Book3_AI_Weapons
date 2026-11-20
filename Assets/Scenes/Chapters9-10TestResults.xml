@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="8" result="Passed" total="8" passed="8" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-11-20 01:44:24Z" end-time="2026-11-20 01:44:25Z" duration="1.0416476">
+  <test-suite type="TestSuite" id="1016" name="Book3_AI_Weapons" fullname="Book3_AI_Weapons" runstate="Runnable" testcasecount="8" result="Passed" start-time="2026-11-20 01:44:24Z" end-time="2026-11-20 01:44:25Z" duration="1.041648" total="8" passed="8" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="PlayMode" />
+    </properties>
+    <test-suite type="Assembly" id="1013" name="Tests.dll" fullname="D:/Book3_AI_Weapons/Library/ScriptAssemblies/Tests.dll" runstate="Runnable" testcasecount="8" result="Passed" start-time="2026-11-20 01:44:24Z" end-time="2026-11-20 01:44:25Z" duration="1.025921" total="8" passed="8" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="8480" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="PlayMode" />
+        <property name="EditorOnly" value="False" />
+      </properties>
+      <test-suite type="TestFixture" id="1001" name="OffmeshTests" fullname="OffmeshTests" classname="OffmeshTests" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-11-20 01:44:24Z" end-time="2026-11-20 01:44:25Z" duration="0.455500" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-case id="1002" name="JumpAllowedCreatesCompletePathAcrossGap" fullname="OffmeshTests.JumpAllowedCreatesCompletePathAcrossGap" methodname="JumpAllowedCreatesCompletePathAcrossGap" classname="OffmeshTests" runstate="Runnable" seed="842091207" result="Passed" start-time="2026-11-20 01:44:24Z" end-time="2026-11-20 01:44:24Z" duration="0.325554" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <output><![CDATA[Reload Time: 2 seconds
+]]></output>
+        </test-case>
+        <test-case id="1003" name="JumpExcludedPreventsCompletePathAcrossGap" fullname="OffmeshTests.JumpExcludedPreventsCompletePathAcrossGap" methodname="JumpExcludedPreventsCompletePathAcrossGap" classname="OffmeshTests" runstate="Runnable" seed="124995470" result="Passed" start-time="2026-11-20 01:44:24Z" end-time="2026-11-20 01:44:25Z" duration="0.112071" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <output><![CDATA[Reload Time: 2 seconds
+]]></output>
+        </test-case>
+      </test-suite>
+      <test-suite type="TestFixture" id="1004" name="PathsTests" fullname="PathsTests" classname="PathsTests" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-11-20 01:44:25Z" end-time="2026-11-20 01:44:25Z" duration="0.183812" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-case id="1005" name="FixedPatrolVisitsWaypointsInOrderAndLoops" fullname="PathsTests.FixedPatrolVisitsWaypointsInOrderAndLoops" methodname="FixedPatrolVisitsWaypointsInOrderAndLoops" classname="PathsTests" runstate="Runnable" seed="1927575591" result="Passed" start-time="2026-11-20 01:44:25Z" end-time="2026-11-20 01:44:25Z" duration="0.101542" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <output><![CDATA[Reload Time: 2 seconds
+]]></output>
+        </test-case>
+        <test-case id="1006" name="RandomPatrolChoosesValidPointWithoutImmediateRepeat" fullname="PathsTests.RandomPatrolChoosesValidPointWithoutImmediateRepeat" methodname="RandomPatrolChoosesValidPointWithoutImmediateRepeat" classname="PathsTests" runstate="Runnable" seed="1316653678" result="Passed" start-time="2026-11-20 01:44:25Z" end-time="2026-11-20 01:44:25Z" duration="0.075179" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <output><![CDATA[Reload Time: 2 seconds
+]]></output>
+        </test-case>
+      </test-suite>
+      <test-suite type="TestFixture" id="1007" name="SensesTests" fullname="SensesTests" classname="SensesTests" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-11-20 01:44:25Z" end-time="2026-11-20 01:44:25Z" duration="0.188774" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-case id="1008" name="HearingDetectsNearbyPlayerBehindSoldier" fullname="SensesTests.HearingDetectsNearbyPlayerBehindSoldier" methodname="HearingDetectsNearbyPlayerBehindSoldier" classname="SensesTests" runstate="Runnable" seed="1781470752" result="Passed" start-time="2026-11-20 01:44:25Z" end-time="2026-11-20 01:44:25Z" duration="0.093083" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <output><![CDATA[Reload Time: 2 seconds
+]]></output>
+        </test-case>
+        <test-case id="1009" name="VisionRequiresPlayerInFrontAndNoWall" fullname="SensesTests.VisionRequiresPlayerInFrontAndNoWall" methodname="VisionRequiresPlayerInFrontAndNoWall" classname="SensesTests" runstate="Runnable" seed="1591198245" result="Passed" start-time="2026-11-20 01:44:25Z" end-time="2026-11-20 01:44:25Z" duration="0.086433" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <output><![CDATA[Reload Time: 2 seconds
+]]></output>
+        </test-case>
+      </test-suite>
+      <test-suite type="TestFixture" id="1010" name="SmarterNPCTests" fullname="SmarterNPCTests" classname="SmarterNPCTests" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-11-20 01:44:25Z" end-time="2026-11-20 01:44:25Z" duration="0.192911" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-case id="1011" name="LowHealthCollectsNearbyPackAndRestoresHealth" fullname="SmarterNPCTests.LowHealthCollectsNearbyPackAndRestoresHealth" methodname="LowHealthCollectsNearbyPackAndRestoresHealth" classname="SmarterNPCTests" runstate="Runnable" seed="636373160" result="Passed" start-time="2026-11-20 01:44:25Z" end-time="2026-11-20 01:44:25Z" duration="0.095173" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <output><![CDATA[Reload Time: 2 seconds
+]]></output>
+        </test-case>
+        <test-case id="1012" name="LowHealthWithoutPacksEntersFleeState" fullname="SmarterNPCTests.LowHealthWithoutPacksEntersFleeState" methodname="LowHealthWithoutPacksEntersFleeState" classname="SmarterNPCTests" runstate="Runnable" seed="287561686" result="Passed" start-time="2026-11-20 01:44:25Z" end-time="2026-11-20 01:44:25Z" duration="0.091014" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <output><![CDATA[Reload Time: 2 seconds
+]]></output>
+        </test-case>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>
