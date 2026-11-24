@@ -38,5 +38,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/smarter_npcs.unity
     guid: b0d34eff928e5dc46a3449a0c240511f
+  - enabled: 1
+    path: Assets/Scenes/npc_army.unity
+    guid: cfd2139b5ed43e34a9b915df02a02176
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 289c1b55c9541489481df5cc06664110, type: 3}

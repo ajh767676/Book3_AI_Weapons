@@ -26,7 +26,7 @@ public class ArmyLeader : MonoBehaviour
             GameObject.FindGameObjectsWithTag("teamMember");
 
         GameObject[] targets =
-            GameObject.FindGameObjectsWithTag("armyTarget");
+            GameObject.FindGameObjectsWithTag("team2");
 
         System.Array.Sort(soldiers,
             (a, b) => a.name.CompareTo(b.name));
