@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 3
   tags:
   - NPCHealthPickup
+  - armyTarget
+  - teamMember
   layers:
   - Default
   - TransparentFX
