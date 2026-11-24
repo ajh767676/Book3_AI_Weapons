@@ -37,13 +37,40 @@ public class TeamMember : MonoBehaviour
         animator.ResetTrigger("retreat");
         animator.SetTrigger("attackOneToOne");
     }
+    public void RespondToAttack(GameObject attacker)
+    {
+        if (attacker == null || attacker == gameObject)
+        {
+            return;
+        }
 
+        // Keep fighting the current target if it is still alive.
+        if (target != null)
+        {
+            ArmyHealth health = target.GetComponent<ArmyHealth>();
+
+            if (health != null && health.health > 0)
+            {
+                return;
+            }
+        }
+
+        target = attacker;
+        attackTimer = 0f;
+
+        animator.SetBool("targetDestroyed", false);
+        animator.SetBool("closeToTarget", false);
+        animator.ResetTrigger("retreat");
+        animator.ResetTrigger("attackOneToOne");
+        animator.SetTrigger("respondToAttack");
+    }
     public void Retreat()
     {
         target = null;
         attackTimer = 0f;
 
         animator.ResetTrigger("attackOneToOne");
+        animator.ResetTrigger("respondToAttack");
         animator.SetBool("closeToTarget", false);
         animator.SetBool("targetDestroyed", false);
         animator.SetTrigger("retreat");
@@ -133,7 +160,7 @@ public class TeamMember : MonoBehaviour
             if (attackTimer >= attackInterval)
             {
                 attackTimer = 0f;
-                targetHealth.TakeDamage(attackDamage);
+                targetHealth.TakeDamage(attackDamage, gameObject);
             }
         }
     }

@@ -7,6 +7,7 @@ TagManager:
   - NPCHealthPickup
   - armyTarget
   - teamMember
+  - team2
   layers:
   - Default
   - TransparentFX
