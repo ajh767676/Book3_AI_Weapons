@@ -60,5 +60,9 @@ public class SceneNavigation : MonoBehaviour
         {
             SceneManager.LoadScene("smarter_npcs");
         }
+        else if (option == 8)
+        {
+            SceneManager.LoadScene("npc_army");
+        }
     }
 }
